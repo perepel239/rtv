@@ -7,6 +7,7 @@ export const app = Joi.object<KnownApp>({
   webosAppId: Joi.string(),
   orsayAppId: Joi.string(),
   playstationAppId: Joi.string(),
+  androidtvAppId: Joi.string(),
   alias: Joi.string().required(),
   description: Joi.string().allow(''),
   defaultParams: Joi.string().allow(''),

@@ -25,6 +25,10 @@ export interface KnownApp extends Record<string, unknown> {
    */
   orsayAppId: string;
   /**
+   * AndroidTV application id
+   */
+  androidtvAppId: string;
+  /**
    * Description
    */
   description: string;

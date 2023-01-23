@@ -5,7 +5,7 @@ import { KnownApp } from './types';
 const appIdName = (platform: Platform) => `${platform}AppId` as PlatformAppIds;
 const collectionName = 'apps';
 
-type PlatformAppIds = 'tizenAppId' | 'webosAppId' | 'orsayAppId' | 'playstationAppId';
+type PlatformAppIds = 'tizenAppId' | 'webosAppId' | 'orsayAppId' | 'playstationAppId' | 'androidtvAppId';
 
 const getApps = () =>
   getDb()

@@ -11,11 +11,12 @@ import * as webos from './webos';
 import * as playstation from './playstation';
 import * as orsay from './orsay';
 import * as vidaa from './vidaa';
+import * as androidtv from './androidtv';
 import { remoteEval } from './shared/remote-eval';
 import { WebosPackAppOptions } from './webos';
 import { TizenPackAppOptions } from './tizen/app-packager';
 
-export type Platform = 'webos' | 'tizen' | 'orsay' | 'playstation' | 'vidaa';
+export type Platform = 'webos' | 'tizen' | 'orsay' | 'playstation' | 'vidaa' | 'androidtv';
 
 const PLATFORMS = {
   tizen,
@@ -23,6 +24,7 @@ const PLATFORMS = {
   playstation,
   orsay,
   vidaa,
+  androidtv,
 };
 
 /**
@@ -60,7 +62,7 @@ const getPlatformById = async (id: string) => {
 const platformByName = (platformName: Platform) => PLATFORMS[platformName];
 
 /**
- * Chech TV is online
+ * Check TV is online
  */
 export const isReady = async (tvIp: string, timeout?: number) => {
   return getPlatform(tvIp).isReady(tvIp, timeout);

@@ -12,7 +12,7 @@ const logger = Loggee.create();
 
 export const exec = util.promisify(childProcess.exec);
 
-const CMD_TIMEOUT = 60 * 1000;
+const CMD_TIMEOUT = 120 * 1000;
 
 /**
  * Exec cmd.

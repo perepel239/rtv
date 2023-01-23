@@ -97,7 +97,7 @@ interface PkgInfo {
   size: string;
 }
 
-export type Platform = 'webos' | 'tizen' | 'orsay' | 'playstation' | 'vidaa';
+export type Platform = 'webos' | 'tizen' | 'orsay' | 'playstation' | 'vidaa' | 'androidtv';
 
 export interface SavedTv {
   /**

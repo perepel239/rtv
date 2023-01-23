@@ -18,6 +18,7 @@ export const appColumns: ColumnsInfo<KnownApp> = {
   webosAppId: { label: 'Webos ID', placeholder: 'Enter Webos ID' },
   playstationAppId: { label: 'PS ID', placeholder: 'Enter PS ID' },
   orsayAppId: { label: 'Orsay ID', placeholder: 'Enter Orsay ID' },
+  androidtvAppId: { label: 'AndTV ID', placeholder: 'Enter AndroidTV package ID' },
   description: { label: 'Description', placeholder: 'Enter Description' },
   evalOnDebug: {
     label: 'Eval on debug',
