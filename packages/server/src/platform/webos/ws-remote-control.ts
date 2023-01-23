@@ -41,7 +41,7 @@ export default class WebosWsRemoteControl {
   _pointerWs: WebSocketAsPromised | undefined;
 
   constructor(tvIp: string) {
-    this.wsUrl = `ws://${tvIp}:3000`;
+    this.wsUrl = `wss://${tvIp}:3001`;
     this.tv = getKnownTv(tvIp);
     this._wsp = new WebSocketAsPromised(this.wsUrl, {
       createWebSocket: (url) => new websocket.w3cwebsocket(url),
