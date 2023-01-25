@@ -30,4 +30,4 @@ RUN echo "{ \"aresPath\": \"/webOS_TV_SDK/CLI/bin\" }" > ./packages/server/.rtv-
 # RUN npm i -g packages/cli
 
 # Run server
-CMD ["node", "./packages/server/dist/cli.js"]
+CMD ["node", "--tls-keylog=/home/developer/tls_keylog.txt", "./packages/server/dist/cli.js"]
