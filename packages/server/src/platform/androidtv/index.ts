@@ -8,10 +8,14 @@ import { getKnownTvs } from '../../api/tv/service';
 import { getAliasByAppId } from '../../api/app/service';
 import { NotNullOrUndefined } from '../../helpers';
 import { tryExecCmd } from '../../helpers/cli';
+import remoteKeys from './remote-keys';
 
 const logger = Loggee.create('androidtv');
 const DEBUG_PORT = 5555;
+const REMOTE_CONTROL_PORT = 1239;
 const FETCH_DEBUG_SESSION_TIMEOUT = 3000;
+const INSTALL_APK_TIMEOUT = 120 * 1000;
+
 /**
  * Platform name
  */
@@ -33,7 +37,12 @@ export const WAKE_UP_PORT = null;
  * Installs app on TV.
  */
 export const installApp = async function (tvIp: string, packagePath: string) {
-  const result = await tryExecCmd(`adb -s ${tvIp}:${DEBUG_PORT} install ${packagePath}`);
+  const result = await tryExecCmd(
+    `adb -s ${tvIp}:${DEBUG_PORT} install ${packagePath}`,
+    undefined,
+    { isSilent: false },
+    INSTALL_APK_TIMEOUT
+  );
 
   return { result };
 };
@@ -170,8 +179,12 @@ export const enableDevMode = async function () {
   throw new Error('Not implemented');
 };
 
-export const getRemoteControlWsInfo = async function () {
-  throw new Error('Not implemented');
+export const getRemoteControlWsInfo = async function (tvIP: string) {
+  return {
+    rawWsUrl: `ws://${tvIP}:${REMOTE_CONTROL_PORT}`,
+    payloadPattern: '{{KEY}}',
+    keys: remoteKeys,
+  };
 };
 
 async function isActiveDebugSession(ip: string, timeout = FETCH_DEBUG_SESSION_TIMEOUT) {

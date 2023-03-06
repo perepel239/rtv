@@ -9,8 +9,7 @@ services:
       - "${PORT:-3000}:3000"
       - "${STREAMS_PORT:-8081}:8081"
     volumes:
-      - tvdata:/home/developer
-      - .:/app
+      - tvdata:/home/developer      
     init: true
     environment:
       - USER=rtv

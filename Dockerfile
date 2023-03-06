@@ -8,7 +8,9 @@ RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y \
       nodejs \
-      iputils-ping
+      iputils-ping \
+      android-tools-adb \
+      mc
 
 # prevent /tmp/sdb.log grow
 RUN ln -fs /dev/null /tmp/sdb.log

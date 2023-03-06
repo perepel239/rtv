@@ -19,12 +19,14 @@ const CMD_TIMEOUT = 60 * 1000;
  * @param {String} cmd
  * @returns {Promise}
  */
-export const execCmd = async function (cmd: string, options = { isSilent: false }) {
+export const execCmd = async function (cmd: string, options = { isSilent: false }, cmd_timeout?: number) {
   logger.log(`CMD: ${cmd}`);
+  console.log(`CMD: ${cmd} TIMEOUT: ${cmd_timeout}`);
+
   const fullCmd = expandPath(cmd);
   // Explicitly set cwd to avoid problem when ares-setup-device --listfull founds no TVs
   const { stdout } = await exec(fullCmd, {
-    timeout: CMD_TIMEOUT,
+    timeout: cmd_timeout === undefined ? CMD_TIMEOUT : cmd_timeout,
     cwd: process.cwd(),
   });
   const cleanStdout = cleanOutput(stdout);
@@ -39,9 +41,14 @@ export const execCmd = async function (cmd: string, options = { isSilent: false 
  * @param {String} cmd
  * @param {String?} outputForError value if error occurs
  */
-export const tryExecCmd = async function (cmd: string, outputForError?: string) {
+export const tryExecCmd = async function (
+  cmd: string,
+  outputForError?: string,
+  options = { isSilent: false },
+  cmd_timeout?: number
+) {
   try {
-    return await execCmd(cmd);
+    return await execCmd(cmd, options, cmd_timeout);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (e: any) {
     // In tests caught error can be assertion error,

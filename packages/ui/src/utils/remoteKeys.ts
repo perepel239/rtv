@@ -419,7 +419,42 @@ const webosKeys: RemoteKey[] = [
   },
 ];
 
+const androidKeys: RemoteKey[] = [
+  {
+    keyCode: 'Enter',
+    keyCodeLabel: 'Enter',
+    tvKeyCode: 'Enter',
+    tvKeyCodeLabel: 'Enter',
+  },
+  ...arrows,  
+  {
+    keyCode: 'Space',
+    keyCodeLabel: 'Space',
+    tvKeyCode: 'Home',
+    tvKeyCodeLabel: 'Home',
+  },  
+  {
+    keyCode: 'Backspace',
+    keyCodeLabel: 'Backspace',
+    tvKeyCode: 'Back',
+    tvKeyCodeLabel: 'Back',
+  },
+  {
+    keyCode: 'KeyW',
+    keyCodeLabel: 'Key W',
+    tvKeyCode: 'VolumeUp',
+    tvKeyCodeLabel: 'Volume Up',
+  },
+  {
+    keyCode: 'KeyS',
+    keyCodeLabel: 'Key S',
+    tvKeyCode: 'VolumeDown',
+    tvKeyCodeLabel: 'Volume Down',
+  },
+];
+
 export const remoteKeysByPlatform: Partial<Record<Platform, RemoteKey[]>> = {
   tizen: tizenKeys,
   webos: webosKeys,
+  androidtv: androidKeys,
 };
