@@ -1,7 +1,6 @@
 /**
  * Module for communicating with AndroidTV.
  */
-//import fetch from 'node-fetch';
 
 import Loggee from 'loggee';
 import { getKnownTvs } from '../../api/tv/service';
@@ -24,7 +23,7 @@ export const NAME = 'androidtv';
 /**
  * TODO
  */
-export const WAKE_UP_PORT = null;
+export const WAKE_UP_PORT = undefined;
 
 /**
  * TODO Init if any
@@ -175,8 +174,10 @@ export const deleteTv = function () {
   // No-op for PS
 };
 
-export const enableDevMode = async function () {
-  throw new Error('Not implemented');
+export const enableDevMode = async function (tvIP: string) {
+  const result = await tryExecCmd(`adb connect ${tvIP}`);
+
+  return { result };
 };
 
 export const getRemoteControlWsInfo = async function (tvIP: string) {
