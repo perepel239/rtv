@@ -177,7 +177,7 @@ export const deleteTv = function () {
 export const enableDevMode = async function (tvIP: string) {
   const result = await tryExecCmd(`adb connect ${tvIP}`);
 
-  return { result };
+  return result;
 };
 
 export const getRemoteControlWsInfo = async function (tvIP: string) {
