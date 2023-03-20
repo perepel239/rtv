@@ -73,13 +73,13 @@ export const getTVInfo = async function (tvIP: string) {
  * Wait until TV is ready
  */
 const TV_READY_TIMEOUT = 60000;
-const TV_READY_INTERAL = 1000;
+const TV_READY_INTERVAL = 1000;
 
 export const waitForReady = async function (ip: string) {
   const tv = new TizenTV(ip);
 
   return waitForFunction(async () => tv.isReady(), {
-    interval: TV_READY_INTERAL,
+    interval: TV_READY_INTERVAL,
     timeout: TV_READY_TIMEOUT,
   });
 };

@@ -7,6 +7,7 @@ import { getKnownTvs } from '../../api/tv/service';
 import { getAliasByAppId } from '../../api/app/service';
 import { NotNullOrUndefined } from '../../helpers';
 import { tryExecCmd } from '../../helpers/cli';
+import { waitForFunction } from '../../helpers/wait-for-function';
 import remoteKeys from './remote-keys';
 
 const logger = Loggee.create('androidtv');
@@ -107,16 +108,13 @@ export const discoverTVs = async function () {
   const allDevices = getKnownTvs().filter((tv) => tv.platform === NAME);
   const devices = await Promise.all(
     allDevices.map(async (tv) => {
-      const isActive = await isActiveDebugSession(tv.ip);
-      return isActive ? tv : undefined;
+      await tryExecCmd(`adb connect ${tv.ip}`);
+
+      return (await isReady(tv.ip)) ? tv : undefined;
     })
   );
 
   return devices.filter(NotNullOrUndefined);
-};
-
-export const isReady = async function (ip: string, timeout?: number) {
-  return isActiveDebugSession(ip, timeout);
 };
 
 /**
@@ -127,11 +125,24 @@ export const isReady = async function (ip: string, timeout?: number) {
 export const getTVInfo = async function () {
   return {};
 };
+
 /**
  * Wait until TV is ready
  */
-export const waitForReady = async function () {
-  throw new Error('Not implemented');
+const TV_READY_TIMEOUT = 60000;
+const TV_READY_INTERVAL = 1000;
+
+export const waitForReady = async function (ip: string) {
+  return waitForFunction(async () => isReady(ip), {
+    interval: TV_READY_INTERVAL,
+    timeout: TV_READY_TIMEOUT,
+  });
+};
+
+export const isReady = async function (ip: string) {
+  const result = await tryExecCmd(`adb -s ${ip} get-state`);
+
+  return result === 'device';
 };
 
 /**
