@@ -163,7 +163,7 @@ export const getLogsUrl = async function () {
  * Debug app on TV.
  */
 export const debugApp = async function (tvIP: string) {
-  throw new Error('Not implemented. Please close manually');
+  throw new Error('Not implemented. Please run manually');
 };
 
 /**

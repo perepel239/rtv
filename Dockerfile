@@ -1,4 +1,4 @@
-FROM vitalets/tizen-webos-sdk:2.0
+FROM kinopoisk/tizen-webos-sdk:test
 
 WORKDIR /app
 
