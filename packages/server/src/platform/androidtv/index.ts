@@ -77,7 +77,9 @@ export const launchApp = async function (tvIp: string, appId: string, params?: R
     return result;
   }
 
-  const result = await tryExecCmd(`adb -s ${tvIp}:${DEBUG_PORT} shell monkey -p ${appId} -c android.intent.category.LAUNCHER 1`);
+  const result = await tryExecCmd(
+    `adb -s ${tvIp}:${DEBUG_PORT} shell monkey -p ${appId} -c android.intent.category.LAUNCHER 1`
+  );
 
   return { result };
 };
