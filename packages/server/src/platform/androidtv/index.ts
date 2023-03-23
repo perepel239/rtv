@@ -22,7 +22,7 @@ const INSTALL_APK_TIMEOUT = 120 * 1000;
 export const NAME = 'androidtv';
 
 /**
- * TODO
+ * Use default port
  */
 export const WAKE_UP_PORT = undefined;
 
@@ -69,10 +69,15 @@ export const getAppState = async function (tvIp: string, appId: string) {
 /**
  * Launch app on TV.
  */
-export const launchApp = async function (tvIp: string, appId: string, params?: Record<string, string>) {
-  const result = await tryExecCmd(
-    `adb -s ${tvIp}:${DEBUG_PORT} shell monkey -p ${appId} -c android.intent.category.LAUNCHER 1`
-  );
+export const launchApp = async function (tvIp: string, appId: string, params?: Record<string, unknown>) {
+  if (params && params['androidtvTarget'] && params['androidtvTarget'] != '') {
+    const deeplink = params['androidtvTarget'];
+    const result = await tryExecCmd(`adb -s ${tvIp}:${DEBUG_PORT} shell am start -d ${deeplink}`);
+
+    return result;
+  }
+
+  const result = await tryExecCmd(`adb -s ${tvIp}:${DEBUG_PORT} shell monkey -p ${appId} -c android.intent.category.LAUNCHER 1`);
 
   return { result };
 };
@@ -149,7 +154,7 @@ export const isReady = async function (ip: string) {
  * Returns developer panel url.
  */
 export const getDevPanelUrl = async function () {
-  throw new Error('Not implemented');
+  throw new Error('Not supported on the platform.');
 };
 
 /**
@@ -163,7 +168,7 @@ export const getLogsUrl = async function () {
  * Debug app on TV.
  */
 export const debugApp = async function (tvIP: string) {
-  throw new Error('Not implemented. Please run manually');
+  throw new Error('Not supported on the platform. Please use launch button.');
 };
 
 /**
@@ -174,15 +179,15 @@ export const launchBrowser = async function () {
 };
 
 export const packApp = async function () {
-  throw new Error('Not implemented');
+  throw new Error('Not supported on the platform.');
 };
 
 export const saveTv = function () {
-  // No-op for PS
+  // No-op for AndroidTV
 };
 
 export const deleteTv = function () {
-  // No-op for PS
+  // No-op for AndroidTV
 };
 
 export const enableDevMode = async function (tvIP: string) {
@@ -198,18 +203,3 @@ export const getRemoteControlWsInfo = async function (tvIP: string) {
     keys: remoteKeys,
   };
 };
-
-async function isActiveDebugSession(ip: string, timeout = FETCH_DEBUG_SESSION_TIMEOUT) {
-  try {
-    //const response = await fetch(`http://${ip}:${DEBUG_PORT}`, {
-    // TODO: use AbortController
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    //  timeout,
-    //});
-    //return response.status === 200;
-    return true;
-  } catch (e) {
-    return false;
-  }
-}

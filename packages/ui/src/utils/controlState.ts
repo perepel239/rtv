@@ -68,7 +68,7 @@ export const getControlState = (props: ControlStateInfo) => {
     if (occupied()) {
       return TV_OCCUPIED;
     }
-    if (tv.platform !== 'webos') {
+    if (!['webos', 'androidtv'].includes(tv.platform)) {
       return NOT_SUPPORTED_BY_PLATFORM;
     }
 

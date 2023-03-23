@@ -86,7 +86,7 @@ export default function RemoteControlModal({ trigger, tv }: Props) {
       {(close: () => void) => (
         <>
           <div className={styles.header}>
-            <h2 className={styles.title}>Remote mode</h2>
+            <h2 className={styles.title}>Remote control</h2>
             <Button className={styles.closeButton} variant="ghost" onClick={close}>
               <CrossIcon />
             </Button>

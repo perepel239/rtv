@@ -238,7 +238,7 @@ const Controls: React.FC<Props> = ({ tv, app, appParams, isTVInfoOpen, toggleTVI
               tooltipId={styles.tooltip}
               tooltipText={remoteControl.disableReason}
             >
-              Remote mode
+              Remote control
             </Button>
           }
           tv={tv}
@@ -251,7 +251,7 @@ const Controls: React.FC<Props> = ({ tv, app, appParams, isTVInfoOpen, toggleTVI
           tooltipId={styles.tooltip}
           tooltipText={devModeControl.disableReason}
         >
-          Dev mode on
+          Turn on devmode
         </Button>
         <Button
           className={tv ? styles.tvInfoButtonEnabled : styles.tvInfoButtonDisabled}

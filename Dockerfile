@@ -5,7 +5,7 @@ WORKDIR /app
 # Prerequisites (Node.js v12)
 RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
 RUN apt-get update && \
-    apt-get upgrade -y && \
+    apt-get upgrade -y --allow-downgrades && \
     apt-get install -y \
       nodejs \
       iputils-ping \
