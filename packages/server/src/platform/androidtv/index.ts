@@ -12,9 +12,13 @@ import remoteKeys from './remote-keys';
 
 const logger = Loggee.create('androidtv');
 const DEBUG_PORT = 5555;
-const REMOTE_CONTROL_PORT = 1239;
+
 const FETCH_DEBUG_SESSION_TIMEOUT = 3000;
 const INSTALL_APK_TIMEOUT = 120 * 1000;
+
+const WS_REMOTE_CONTROL_CLASSPATH = '/mnt/sdcard/ru.kinopoisk.wsremotecontrol.apk';
+const WS_REMOTE_CONTROL_CLASS = 'ru.kinopoisk.wsremotecontrol.WSRemoteControlServer';
+const WS_REMOTE_CONTROL_PORT = 1239;
 
 /**
  * Platform name
@@ -195,12 +199,17 @@ export const deleteTv = function () {
 export const enableDevMode = async function (tvIP: string) {
   const result = await tryExecCmd(`adb connect ${tvIP}`);
 
+  if (result.startsWith('connected')) {
+    await tryExecCmd(`adb shell export CLASSPATH="${WS_REMOTE_CONTROL_CLASSPATH}"\\; \
+     exec app_process /system/bin ${WS_REMOTE_CONTROL_CLASS} &`);
+  }
+
   return result;
 };
 
 export const getRemoteControlWsInfo = async function (tvIP: string) {
   return {
-    rawWsUrl: `ws://${tvIP}:${REMOTE_CONTROL_PORT}`,
+    rawWsUrl: `ws://${tvIP}:${WS_REMOTE_CONTROL_PORT}`,
     payloadPattern: '{{KEY}}',
     keys: remoteKeys,
   };
