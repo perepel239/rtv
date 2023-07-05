@@ -7,6 +7,7 @@ import Loggee from 'loggee';
 import * as platform from '../../platform';
 import { sendXml, send404 } from '../protocol';
 import { getServerOrigin, getServerOriginWs } from '../../helpers/srv';
+import { switchVPN } from '../../helpers/network';
 import { proxyUrlAsPath } from '../../proxy/helper';
 import { RTV_USER, getRtvUserFromExpressRequest } from '../../helpers/rtv-user';
 import { formatLastUsedInfo, freeTv as free, getTvLastUsed, whoIsUsingTv } from '../../helpers/tv-last-used';
@@ -45,6 +46,7 @@ export const getKnownTvs = async (req: Request, res: Response<KnownTv[]>) => {
 export const saveKnownTv = async (req: Request<unknown, unknown, KnownTv>, res: Response<KnownTv>) => {
   const tv = req.body;
   await platform.saveTv(tv);
+  await switchVPN(tv.ip, tv.vpn);
   const newTv = TvService.saveKnownTv(tv);
   res.json(newTv);
 };

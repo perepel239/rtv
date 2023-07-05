@@ -17,6 +17,7 @@ export const fieldNameMap: Record<keyof TVInfo, string> = {
   online: 'Online',
   mac: 'MAC',
   webOSPassphrase: 'Passphrase',
+  vpn: 'VPN',  
   isVisible: 'Is Visible',
   streamUrl: 'Stream URL',
   webOSClientKey: 'Client Key',

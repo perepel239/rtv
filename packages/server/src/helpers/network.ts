@@ -82,3 +82,13 @@ export const isOnline = async (tvIp: string, timeout = 1) => {
     return false;
   }
 };
+
+export async function switchVPN(tvIP: string, vpn: string | undefined) {  
+  const status = JSON.parse(await execCmd(`switch-vpn --status`));
+  
+  if (!vpn && status[tvIP]) {
+    return await execCmd(`switch-vpn --del ${tvIP}`);
+  } else if (vpn && !(vpn === status[tvIP])) {
+    return await execCmd(`switch-vpn --add ${tvIP} --table ${vpn}`);
+  }  
+};

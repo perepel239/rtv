@@ -137,6 +137,10 @@ export interface SavedTv {
    */
   isVisible?: boolean;
   /**
+   * VPN the TV uses
+   */
+  vpn?: string;
+  /**
    * Stream URL
    */
   streamUrl?: string;
