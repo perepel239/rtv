@@ -1,0 +1,19 @@
+.button {
+  min-width: 32px;
+  padding: 8px;
+}
+
+.socketOn {
+  composes: button;
+  background-color: var(--system-apple-green);
+}
+
+.socketOff {
+  composes: button;
+  background-color: var(--system-red);
+}
+
+.socketDisabled {
+  composes: button;
+  background-color: var(--monochrome-light-gray);
+}

@@ -1,4 +1,4 @@
-import { TVInfo, KnownTv, Result } from 'rtv-server';
+import { TVInfo, KnownTv, Result, SmartSocketInfo } from 'rtv-server';
 import { WsRemoteControl } from '../remote-control/ws-remote-control';
 import ApiBase from './common/api-base';
 
@@ -147,6 +147,29 @@ export default class TV extends ApiBase {
       options: {
         method: 'post',
       },
+    });
+  }
+
+  /**
+   * TODO: Move smart sockets to Room API
+   * TV expanded information
+   */
+  async getSmartSocketInfo(ip: string): Promise<SmartSocketInfo> {
+    return this._request({
+      path: 'tv/smart-socket-info',
+      queryObj: { ip },
+    });
+  }
+
+  /**
+   * TODO: Move smart sockets to Room API
+   * TV expanded information
+   */
+  async toggleSmartSocketState(ip: string, isOn: boolean): Promise<Result> {
+    return this._request({
+      path: 'tv/smart-socket-toggle',
+      queryObj: { ip, isOn },
+      options: { method: 'post' },
     });
   }
 }

@@ -83,5 +83,5 @@ export default class RTVClient {
   }
 }
 
-export { KnownApp, AppState, KnownTv, TVInfo, Platform } from 'rtv-server';
+export { KnownApp, AppState, KnownTv, TVInfo, Platform, SmartSocketInfo } from 'rtv-server';
 export type { WsRemoteControl } from './remote-control/ws-remote-control';

@@ -27,6 +27,7 @@ export const mergeFromEnv = () => {
     streamsPort: process.env.STREAMS_PORT,
     webosAccountLogin: process.env.WEBOS_ACCOUNT_LOGIN,
     webosAccountPassword: process.env.WEBOS_ACCOUNT_PASSWORD,
+    smartSocketControlToken: process.env.SMART_SOCKET_CONTROL_TOKEN,
   });
 };
 

@@ -14,7 +14,8 @@ import { formatLastUsedInfo, freeTv as free, getTvLastUsed, whoIsUsingTv } from 
 import * as wol from '../../platform/shared/smart-wol';
 import { getAppByAppId } from '../app/service';
 import * as TvService from './service';
-import { KnownTv, RemoteControlInfo, Result, TVInfo, URLInfo } from './types';
+import * as SmartSocketManager from './smart-sockets';
+import { KnownTv, RemoteControlInfo, Result, SmartSocketInfo, TVInfo, URLInfo } from './types';
 
 const logger = Loggee.create();
 
@@ -127,6 +128,18 @@ export const freeTv = async (req: Request, res: Response<Result>) => {
   const { ip } = req.query as Record<string, string>;
   free(ip);
   res.json({ result: `TV ${ip} is free now` });
+};
+
+export const getSmartSocketInfo = async (req: Request, res: Response<SmartSocketInfo>) => {
+  const { ip } = req.query as Record<string, string>;
+  const result = await SmartSocketManager.getSmartSocketInfo(ip);
+  res.json({ ip: `${ip}`, isOn: result?.isOn });
+};
+
+export const toggleSmartSocket = async (req: Request, res: Response<Result>) => {
+  const { ip, isOn } = req.query as Record<string, string>;
+  const result = await SmartSocketManager.toggleSmartSocket(ip, isOn);
+  res.json({ result });
 };
 
 export const getWidgetlist = async (req: Request, res: Response<string>) => {

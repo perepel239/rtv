@@ -202,3 +202,15 @@ export interface RemoteControlInfo {
    */
   payloadPattern: string;
 }
+
+export interface SmartSocketInfo {
+  /**
+   * TV IP
+   */
+  ip: string;
+
+  /**
+   * Is on
+   */
+  isOn?: boolean;
+}

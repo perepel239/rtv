@@ -57,4 +57,7 @@ router.post('/free', queryIpAlias(getIpAliases), validateQuery(ipSchema), tvCont
 
 router.get('/widgetlist', tvController.getWidgetlist);
 
+router.get('/smart-socket-info', validateQuery(ipSchema), tvController.getSmartSocketInfo);
+router.post('/smart-socket-toggle', validateQuery(ipSchema), tvController.toggleSmartSocket);
+
 export default router;

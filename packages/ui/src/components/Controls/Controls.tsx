@@ -10,6 +10,7 @@ import { AppState, KnownTv, Platform, KnownApp } from 'rtv-client';
 import Button from 'components/Button/Button';
 import ConfirmationModal from 'components/ConfirmationModal/ConfirmationModal';
 import RemoteControlModal from 'components/RemoteControlModal/RemoteControlModal';
+import SmartSocketControl from 'components/SmartSocket/SmartSocketControl';
 import { errorToast, successToast } from 'components/ToastContainer/ToastContainer';
 import useAuth from 'hooks/useAuth';
 import { ReactComponent as ChevronDownIcon } from 'icons/chevron-down.svg';
@@ -253,6 +254,9 @@ const Controls: React.FC<Props> = ({ tv, app, appParams, isTVInfoOpen, toggleTVI
         >
           Turn on devmode
         </Button>
+        <SmartSocketControl
+          tv={tv}
+        />
         <Button
           className={tv ? styles.tvInfoButtonEnabled : styles.tvInfoButtonDisabled}
           disabled={tvControl.disabled}

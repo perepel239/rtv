@@ -21,6 +21,7 @@ export interface RtvServerConfig extends Record<string, unknown> {
   rooms?: Room[];
   webosAccountLogin?: string;
   webosAccountPassword?: string;
+  smartSocketControlToken: string;
 }
 
 export const defaults: RtvServerConfig = {
@@ -35,4 +36,5 @@ export const defaults: RtvServerConfig = {
   workDirPath: `${tmpdir()}/rtv-temp`,
   tvIsOccupiedTimeout: 5 * 60 * 1000,
   rtvDataPath: `${homedir}/rtv-data`,
+  smartSocketControlToken: '',
 };

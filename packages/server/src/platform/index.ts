@@ -5,6 +5,7 @@ import fs from 'fs-extra';
 import { getAppByAlias, getAppByAppId, getAppById } from '../api/app/service';
 import { getKnownTv, getKnownTvById } from '../api/tv/service';
 import { KnownTv } from '../api/tv/types';
+import * as SmartSocketManager from '../api/tv/smart-sockets';
 import { isOnline as ping } from '../helpers/network';
 import * as tizen from './tizen';
 import * as webos from './webos';
@@ -86,6 +87,7 @@ export const isOnline = async (tvIp: string, platform: Platform) => {
 export const init = () => {
   // currently no webos initialization, but it can be added later
   tizen.init();
+  SmartSocketManager.init();
 };
 
 export const supportsDevToolsProtocol = async function (tvIP: string) {

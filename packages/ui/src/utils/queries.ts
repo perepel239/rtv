@@ -5,4 +5,5 @@ export const queries = {
   mainKnownTvs: 'main-known-tvs',
   tvInfo: 'tv-info',
   appState: 'app-state',
+  smartSocketState: 'smart-socket-state',
 };

@@ -112,6 +112,16 @@ export async function enableDevMode(ip: string) {
   return execCmd(rtvClient.tv.enableDevMode(ip), { logResult: true });
 }
 
+export async function fetchSmartSocketInfo(ip: string) {
+  log(`Fetching smart socket info for ${ip}...`);
+  return execCmd(rtvClient.tv.getSmartSocketInfo(ip), { logResult: false });
+}
+
+export async function toggleSmartSocket(ip: string, isOn: boolean) {
+  log('Trying to toggle smart socket...');
+  return execCmd(rtvClient.tv.toggleSmartSocketState(ip, isOn), { logResult: false });
+}
+
 export async function roomList() {
   return execCmd(rtvClient.room.list());
 }
