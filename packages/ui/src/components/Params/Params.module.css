@@ -43,7 +43,7 @@
   max-width: 50vw;
   max-height: 50vh;
   overflow: auto;
-  font-family: Menlo;
+  font-family: Menlo, "Ubuntu Mono", monospace;
   margin: 0;
 }
 
